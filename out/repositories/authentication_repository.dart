@@ -1,55 +1,46 @@
 @injectable
-class BillRepository {
-  final IBillApiDataSource billApiDataSource;
+class AuthenticationRepository {
+  final IAuthenticationApiDataSource authenticationApiDataSource;
 
-  BillRepository(this.billApiDataSource);
+  AuthenticationRepository(this.authenticationApiDataSource);
 
-  Future<Either<Failure, BillGroupResponse>> fetchBillGroups({
-    required String slug,
-  }) {
-    return billApiDataSource.fetchBillGroups(slug);
+
+  
+  
+  
+  
+  Future<Either<Failure,UserResponse>> getUserDetails(
+  
+  
+  
+    
+  ){
+    return authenticationApiDataSource.getUserDetails(
+    
+    );
   }
-
-  Future<Either<Failure, BillTypeResponse>> fetchBill({
-    required String slug,
-  }) {
-    return billApiDataSource.fetchBillType(slug);
+  
+  
+  
+  
+  Future<Either<Failure,LoginResponse>> login(
+  
+  
+  
+    
+    String username,
+    
+    String password,
+    
+  ){
+    return authenticationApiDataSource.login(
+    
+    String username,
+    
+    String password,
+    
+    );
   }
+  
 
-  Future<Either<Failure, BillLookupResponse>> fetchBillInfo({
-    required String endpoint,
-    required BillLookupRequest request,
-  }) {
-    return billApiDataSource.fetchBillInfo(endpoint, request);
-  }
-
-  Future<Either<Failure, BillPaymentResponse>> payBill({
-    required BillPaymentRequest paymentRequest,
-  }) {
-    return billApiDataSource.payBill(paymentRequest);
-  }
-
-  Future<Either<Failure, AirtimePinResponse>> buyAirtimePin({
-    required BuyAirtimePinRequest request,
-  }) {
-    return billApiDataSource.buyAirtimePin(request);
-  }
-
-  Future<Either<Failure, MinimumPayResponse>> fetchMinPayableAmount({
-    required MinimumPayRequest request,
-  }) {
-    return billApiDataSource.fetchMinPayableAmount(request);
-  }
-
-  Future<Either<Failure, AirtimePinHistoryResponse>> getAirtimePinHistory() {
-    return billApiDataSource.getAirtimePinHistory();
-  }
-
-  Future<Either<Failure, CommissionHistory>> getCommissionHistory(
-    int pageKey,
-    DateFilterValueObject dateFilterValueObject,
-  ) {
-    return billApiDataSource.getCommissionHistory(
-        pageKey, dateFilterValueObject);
-  }
 }

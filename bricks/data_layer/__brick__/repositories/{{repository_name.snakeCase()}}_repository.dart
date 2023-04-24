@@ -1,55 +1,32 @@
 @injectable
-class BillRepository {
-  final IBillApiDataSource billApiDataSource;
+class {{repository_name.pascalCase()}}Repository {
+  final I{{datasource_name.pascalCase()}}DataSource {{datasource_name.camelCase()}}DataSource;
 
-  BillRepository(this.billApiDataSource);
+  {{repository_name.pascalCase()}}Repository(this.{{datasource_name.camelCase()}}DataSource);
 
-  Future<Either<Failure, BillGroupResponse>> fetchBillGroups({
-    required String slug,
-  }) {
-    return billApiDataSource.fetchBillGroups(slug);
+
+  {{#functions}}
+  {{#isApi}}
+  {{^isEither}}
+  Future<{{return_type.pascalCase()}}> {{function_name.camelCase()}}(
+  {{/isEither}}
+  {{#isEither}}
+  Future<Either<Failure,{{return_type.pascalCase()}}>> {{function_name.camelCase()}}(
+  {{/isEither}}
+  {{/isApi}}
+  {{^isApi}}
+  {{return_type.pascalCase()}} {{function_name.camelCase()}}(
+  {{/isApi}}
+    {{#parameters}}
+    {{type}} {{name.camelCase()}},
+    {{/parameters}}
+  ){
+    return {{datasource_name.camelCase()}}DataSource.{{function_name.camelCase()}}(
+    {{#parameters}}
+    {{name.camelCase()}},
+    {{/parameters}}
+    );
   }
+  {{/functions}}
 
-  Future<Either<Failure, BillTypeResponse>> fetchBill({
-    required String slug,
-  }) {
-    return billApiDataSource.fetchBillType(slug);
-  }
-
-  Future<Either<Failure, BillLookupResponse>> fetchBillInfo({
-    required String endpoint,
-    required BillLookupRequest request,
-  }) {
-    return billApiDataSource.fetchBillInfo(endpoint, request);
-  }
-
-  Future<Either<Failure, BillPaymentResponse>> payBill({
-    required BillPaymentRequest paymentRequest,
-  }) {
-    return billApiDataSource.payBill(paymentRequest);
-  }
-
-  Future<Either<Failure, AirtimePinResponse>> buyAirtimePin({
-    required BuyAirtimePinRequest request,
-  }) {
-    return billApiDataSource.buyAirtimePin(request);
-  }
-
-  Future<Either<Failure, MinimumPayResponse>> fetchMinPayableAmount({
-    required MinimumPayRequest request,
-  }) {
-    return billApiDataSource.fetchMinPayableAmount(request);
-  }
-
-  Future<Either<Failure, AirtimePinHistoryResponse>> getAirtimePinHistory() {
-    return billApiDataSource.getAirtimePinHistory();
-  }
-
-  Future<Either<Failure, CommissionHistory>> getCommissionHistory(
-    int pageKey,
-    DateFilterValueObject dateFilterValueObject,
-  ) {
-    return billApiDataSource.getCommissionHistory(
-        pageKey, dateFilterValueObject);
-  }
 }
