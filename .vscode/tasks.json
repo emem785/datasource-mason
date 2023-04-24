@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // build runner's build task
+        {
+            "label": "build data_layer", // this label will be useful later
+            "type": "shell",
+            "command": "mason",
+            "args": [
+                "make",
+                "data_layer",
+                "-c",
+                "bricks/data_layer/data_layer_config.json",
+                "-o",
+                "./out",
+                "--on-conflict overwrite",
+            ],
+            "presentation": {
+                "echo": true, // write logs
+                "reveal": "silent", // i don't wanna see the terminal window
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false // i wanna see logs when I want
+            },
+            "problemMatcher": [
+                "$dart-build_runner"
+            ],
+            "group": "build",
+            "detail": ""
+        },
+    ]
+}

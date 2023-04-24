@@ -1,0 +1,30 @@
+{
+	"datasource_name": "authentication api",
+	"repository_name": "authentication",
+	"isApi": true,
+	"isLocal": false,
+	"functions": [
+		{
+			"return_type": "user response",
+			"function_name": "get user details",
+			"isEither": true,
+			"parameters": [
+			]
+		},
+		{
+			"return_type": "login response",
+			"function_name": "login",
+			"isEither": true,
+			"parameters": [
+				{
+					"type": "String",
+					"name": "username"
+				},
+				{
+					"type": "String",
+					"name": "password"
+				}
+			]
+		}
+	]
+}
